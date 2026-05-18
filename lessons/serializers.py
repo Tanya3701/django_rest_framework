@@ -20,7 +20,11 @@ class CourseSerializer(ModelSerializer):
     def get_lessons_in_lesson(self, obj):
         return [lesson.title for lesson in Lesson.objects.filter(course=obj)]
 
-
     class Meta:
         model = Course
-        fields = ("title", "description", "lessons_in_course_count", "lessons_in_lesson")
+        fields = (
+            "title",
+            "description",
+            "lessons_in_course_count",
+            "lessons_in_lesson",
+        )
