@@ -1,0 +1,50 @@
+[
+{
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "date": "2026-01-15",
+        "paid_lesson": null,
+        "paid_course": 1,
+        "pay_amount": "3000.00",
+        "payment_form": "Наличные"
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "date": "2026-02-13",
+        "paid_lesson": null,
+        "paid_course": 2,
+        "pay_amount": "5000.00",
+        "payment_form": "Наличные"
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 4,
+    "fields": {
+        "user": 3,
+        "date": "2026-03-17",
+        "paid_lesson": 5,
+        "paid_course": null,
+        "pay_amount": "1000.00",
+        "payment_form": "Безналичные"
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 5,
+    "fields": {
+        "user": 4,
+        "date": "2026-04-03",
+        "paid_lesson": 2,
+        "paid_course": null,
+        "pay_amount": "2000.00",
+        "payment_form": "Безналичные"
+    }
+}
+]

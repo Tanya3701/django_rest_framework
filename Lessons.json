@@ -1,0 +1,79 @@
+[
+{
+    "model": "lessons.lesson",
+    "pk": 1,
+    "fields": {
+        "title": "урок",
+        "description": "учебный урок",
+        "preview": "",
+        "course": 1,
+        "link": "http://link.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 2,
+    "fields": {
+        "title": "Легкий1",
+        "description": "Легкий урок1",
+        "preview": "",
+        "course": 6,
+        "link": "http://link1.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 3,
+    "fields": {
+        "title": "Легкий2",
+        "description": "Легкий урок2",
+        "preview": "",
+        "course": 6,
+        "link": "http://link2.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 4,
+    "fields": {
+        "title": "Средний1",
+        "description": "Средний урок1",
+        "preview": "",
+        "course": 7,
+        "link": "http://link3.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 5,
+    "fields": {
+        "title": "Средний2",
+        "description": "Средний урок2",
+        "preview": "",
+        "course": 7,
+        "link": "http://link3.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 6,
+    "fields": {
+        "title": "Сложный1",
+        "description": "Сложный урок1",
+        "preview": "",
+        "course": 5,
+        "link": "http://link4.ru"
+    }
+},
+{
+    "model": "lessons.lesson",
+    "pk": 7,
+    "fields": {
+        "title": "Сложный2",
+        "description": "Сложный урок2",
+        "preview": "",
+        "course": 5,
+        "link": "http://link4.ru"
+    }
+}
+]

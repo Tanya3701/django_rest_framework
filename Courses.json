@@ -1,0 +1,65 @@
+[
+{
+    "model": "lessons.course",
+    "pk": 1,
+    "fields": {
+        "title": "учеба",
+        "preview": "",
+        "description": "учебная учеба"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 2,
+    "fields": {
+        "title": "урок",
+        "preview": "",
+        "description": "учебный урок"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 3,
+    "fields": {
+        "title": "учеба",
+        "preview": "",
+        "description": "учебная учеба"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 4,
+    "fields": {
+        "title": "учеба",
+        "preview": "",
+        "description": "учебная учеба"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 5,
+    "fields": {
+        "title": "Сложный",
+        "preview": "",
+        "description": "Сложный курс"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 6,
+    "fields": {
+        "title": "Легкий",
+        "preview": "",
+        "description": "Легкий курс"
+    }
+},
+{
+    "model": "lessons.course",
+    "pk": 7,
+    "fields": {
+        "title": "Средний",
+        "preview": "",
+        "description": "Средний курс"
+    }
+}
+]
