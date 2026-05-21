@@ -1,10 +1,21 @@
 from django.db import models
 
+from users.models import User
+
 
 class Course(models.Model):
-    title = models.CharField(max_length=100)
-    preview = models.ImageField(upload_to="lessons/images/", null=True, blank=True)
-    description = models.TextField()
+    title = models.CharField(max_length=100, verbose_name="Название курса")
+    preview = models.ImageField(
+        upload_to="lessons/images/", null=True, blank=True, verbose_name="Изображение"
+    )
+    description = models.TextField(verbose_name="Описание курса")
+    author_course = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        verbose_name="Автор курса",
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.title
@@ -15,11 +26,20 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    preview = models.ImageField(upload_to="lessons/images/", null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    link = models.URLField()
+    title = models.CharField(max_length=100, verbose_name="Заголовок урока")
+    description = models.TextField(verbose_name="Описание урока")
+    preview = models.ImageField(
+        upload_to="lessons/images/", null=True, blank=True, verbose_name="Изображение"
+    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Курс")
+    link = models.URLField(verbose_name="Ссылка", null=True, blank=True)
+    author_lesson = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Автор урока",
+    )
 
     def __str__(self):
         return self.title
