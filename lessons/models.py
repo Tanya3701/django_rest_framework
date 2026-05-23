@@ -9,7 +9,7 @@ class Course(models.Model):
         upload_to="lessons/images/", null=True, blank=True, verbose_name="Изображение"
     )
     description = models.TextField(verbose_name="Описание курса")
-    author_course = models.ForeignKey(
+    owner = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         verbose_name="Автор курса",
@@ -33,7 +33,7 @@ class Lesson(models.Model):
     )
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Курс")
     link = models.URLField(verbose_name="Ссылка", null=True, blank=True)
-    author_lesson = models.ForeignKey(
+    owner = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         null=True,
@@ -47,3 +47,16 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
+
+
+class Subscription(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+
+    def __str__(self):
+        return self.course.title
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+

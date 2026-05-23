@@ -1,13 +1,14 @@
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
-
-from lessons.models import Course, Lesson
+from lessons.validators import UrlValidator
+from lessons.models import Course, Lesson, Subscription
 
 
 class LessonSerializer(ModelSerializer):
     class Meta:
         model = Lesson
         fields = "__all__"
+        validators = [UrlValidator(field="link")]
 
 
 class CourseSerializer(ModelSerializer):
@@ -30,5 +31,11 @@ class CourseSerializer(ModelSerializer):
             "description",
             "lessons_in_course_count",
             "lessons_in_lesson",
-            "author_course",
+            "owner",
         )
+
+
+class SubscriptionSerializer(ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = "__all__"
