@@ -1,15 +1,18 @@
+from rest_framework import status
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
     ListAPIView,
     RetrieveAPIView,
     UpdateAPIView,
+    get_object_or_404,
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from lessons.models import Course, Lesson, Subscription
+from lessons.pagination import CustomPageNumberPagination
 from lessons.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsAuthorOrReadOnly, ModeratorsPermission
 
@@ -17,6 +20,7 @@ from users.permissions import IsAuthorOrReadOnly, ModeratorsPermission
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    pagination_class = CustomPageNumberPagination
 
     def perform_create(self, serializer):
         course = serializer.save()
@@ -25,7 +29,10 @@ class CourseViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action == "create":
-            self.permission_classes = (~ModeratorsPermission, IsAuthenticated,)
+            self.permission_classes = (
+                ~ModeratorsPermission,
+                IsAuthenticated,
+            )
         elif self.action in ["update", "retrieve", "partial_update"]:
             self.permission_classes = (ModeratorsPermission | IsAuthorOrReadOnly,)
         elif self.action == "destroy":
@@ -53,6 +60,7 @@ class LessonListAPIView(ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = (ModeratorsPermission | IsAuthenticated,)
+    pagination_class = CustomPageNumberPagination
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):
@@ -77,23 +85,23 @@ class LessonDestroyAPIView(DestroyAPIView):
     queryset = Lesson.objects.all()
     permission_classes = (
         IsAuthenticated,
-        IsAuthorOrReadOnly, ~ModeratorsPermission,
+        IsAuthorOrReadOnly | ~ModeratorsPermission,
     )
+
 
 class SubscriptionAPIView(CreateAPIView):
     queryset = Subscription.objects.all()
 
-    def post(self, request, *args, **kwargs):
+    def post(self, *args, **kwargs):
         user = self.request.user
-        course_id = request.data.get("course_id")
-        course_item = Course.objects.get(id=course_id)
-        subscription_item = Subscription.objects.get(
-            id=request.data.get(user=user, course=course_item)
-        )
+        course_id = self.request.data["course_id"]
+        course_item = get_object_or_404(Course, pk=course_id)
+        subscription_item = Subscription.objects.filter(user=user, course=course_item)
         if subscription_item.exists():
             subscription_item.delete()
-            message = "Подписка удвлена"
+            message = "Подписка удалена"
+            return Response({"message": message}, status=status.HTTP_200_OK)
         else:
             Subscription.objects.create(user=user, course=course_item)
             message = "Подписка добавлена"
-        return Response({"message": message})
+            return Response({"message": message}, status=status.HTTP_201_CREATED)
