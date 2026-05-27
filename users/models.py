@@ -22,21 +22,28 @@ class User(AbstractUser):
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField()
-    paid_lesson = models.ForeignKey(
+    date = models.DateField(null=True, blank=True)
+    lesson = models.ForeignKey(
         "lessons.lesson", on_delete=models.CASCADE, null=True, blank=True
     )
-    paid_course = models.ForeignKey(
+    course = models.ForeignKey(
         "lessons.course", on_delete=models.CASCADE, null=True, blank=True
     )
-    pay_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.PositiveIntegerField(default=0)
     payment_form = models.CharField(
-        choices=[("cash", "Наличные"), ("non-cash", "Безналичные")]
+        choices=[
+            ("cash", "Наличные"),
+            ("non-cash", "Безналичные"),
+        ],
+        null=True,
+        blank=True,
     )
+    link = models.URLField(max_length=1000, null=True, blank=True)
+    session_id = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
 
     def __str__(self):
-        return self.user.email
+        return self.amount

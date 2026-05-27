@@ -56,4 +56,5 @@ class CourseSerializer(ModelSerializer):
             "owner",
             "subscription",
             "sign_up",
+            "price",
         )
