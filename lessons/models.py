@@ -17,6 +17,7 @@ class Course(models.Model):
         blank=True,
     )
     price = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

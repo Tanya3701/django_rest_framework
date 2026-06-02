@@ -9,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 from lessons.models import Course, Lesson, Subscription
 from lessons.pagination import CustomPageNumberPagination
 from lessons.serializers import CourseSerializer, LessonSerializer
+from lessons.tasks import send_email_about_updates
 from users.permissions import IsAuthorOrReadOnly, ModeratorsPermission
 
 
@@ -19,8 +20,12 @@ class CourseViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         course = serializer.save()
-        course.author_course = self.request.user
+        course.owner = self.request.user
         course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        send_email_about_updates.delay(course.id)
 
     def get_permissions(self):
         if self.action == "create":
@@ -47,7 +52,7 @@ class LessonCreateAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         lesson = serializer.save()
-        lesson.author_lesson = self.request.user
+        lesson.owner = self.request.user
         lesson.save()
 
 
