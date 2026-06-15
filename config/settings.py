@@ -11,7 +11,7 @@ SECRET_KEY = "django-insecure-tw@sjx+lg5*9*v_0t(*u&n8+r-adtrnk!hvevl(^a=e9)47nu!
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -75,7 +75,7 @@ load_dotenv()
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("DB_NAME"),
+        "NAME": os.getenv("REDIS_HOST"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
@@ -122,7 +122,7 @@ SIMPLE_JWT = {
 }
 
 STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
-
+REDIS_HOST = os.getenv("REDIS_HOST")
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
