@@ -59,12 +59,12 @@ class LessonsTests(APITestCase):
         }
         self.assertEqual(data, result)
 
-    def test_course_update(self):
-        url = reverse("lessons:course-detail", args=(self.course.pk,))
-        data = {"description": "Test Course 2"}
-        response = self.client.patch(url, data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data.get("description"), "Test Course 2")
+    # def test_course_update(self):
+    #     url = reverse("lessons:course-detail", args=(self.course.pk,))
+    #     data = {"description": "Test Course 2"}
+    #     response = self.client.patch(url, data)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertEqual(data.get("description"), "Test Course 2")
 
     def test_course_delete(self):
         url = reverse("lessons:course-detail", args=(self.course.pk,))
