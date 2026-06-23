@@ -18,6 +18,17 @@ services:
             - redis
         networks:
             - app_network
+
+    nginx:
+      build:
+            context: ./nginx
+      ports:
+          - "8080:80"
+      volumes:
+          - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+          - static_volume:/app/staticfiles
+      depends_on:
+          - web
     db:
         image: postgres:17
         container_name: db

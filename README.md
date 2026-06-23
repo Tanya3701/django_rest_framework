@@ -1,38 +1,49 @@
-### Настройки проекта
+## Установка
 
-- **Клонируйте репозиторий**: 
-- - https://github.com/Tanya3701/django_rest_framework.
-- **Переменные окружения**: 
-- - Создайте файл .env в корне проекта и добавьте туда необходимые переменные окружения, указанные в файле .env.example.
-- **Примените миграции**: 
-- - Используйте команду `python manage.py makemigrations`
+### Локальная разработка
 
-### Запуск проекта
+* git clone git@github.com:blupup-barcs/drf-pr.git 
 
-1. Установите Docker и Docker Compose, если они ещё не установлены.
-2. В терминале, перейдите в директорию проекта.
-3. Запустите команду:
+* cd drf-project
 
-docker-compose up
+* python -m venv venv
 
-### Проверка работоспособности
+* source venv/bin/activate
 
-- **Бэкенд**: Запустите команду curl http://localhost:8000/api/health.
-- - Ответ должен содержать "status": "ok".
-- **PostgreSQL**: Используйте команду psql -h localhost -U <username> -d <database> для подключения.
-- - Выполните простую команду, например, SELECT 1;, и проверьте, что она выполняется успешно.
-- **Redis**: Выполните команду redis-cli -h localhost ping.
-- - Убедитесь, что ответ "PONG".
-- **Celery** и **Celery Beat**: Убедись, что Celery воркеры запущены с помощью команды docker-compose logs celery.
-- - Проверьте, что в логах нет ошибок.
+* pip install -r requirements.txt
 
-### Дополнительные команды
+* cp .env.sample .env  
+  (заполните переменные)
 
-- **Для просмотра запущенных контейнеров**:
-- - docker-compose ps
+* python manage.py migrate
 
-- **Для просмотра логов всех контейнеров**:
-- docker-compose logs
+* python manage.py runserver
 
-- **Для остановки сервисов и удаления контейнеров**:
-- - docker-compose down -v.
+### Production-развертывание
+
+#### На сервере выполните:
+
+* sudo apt update && sudo apt install docker.io
+
+* sudo systemctl enable docker
+
+* mkdir -p ~/drf-project
+
+* Скопируйте .env в ~/drf-project/.env
+
+
+
+CI/CD Pipeline
+
+Автоматически при push, pull_request:
+
+* Собирает Docker-образ
+* Пушит в Docker Hub
+* Разворачивает на сервере через SSH
+
+Необходимые Secrets:
+
+* DOCKER_HUB_USERNAME
+* DOCKER_HUB_TOKEN
+* SSH_KEY
+* SERVER_IP
