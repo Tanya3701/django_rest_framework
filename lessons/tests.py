@@ -54,6 +54,7 @@ class LessonsTests(APITestCase):
                     "lessons_in_lesson": ["test"],
                     "owner": self.user.pk,
                     "subscription": True,
+                    "price": self.course.price,
                 }
             ],
         }
@@ -103,6 +104,7 @@ class LessonsTests(APITestCase):
                     "description": self.lesson.description,
                     "preview": None,
                     "link": None,
+                    "price": self.lesson.price,
                     "course": self.course.pk,
                     "owner": self.user.pk,
                 }
