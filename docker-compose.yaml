@@ -33,7 +33,7 @@ services:
         image: postgres:17
         container_name: db
         env_file:
-            - .env.
+            - .env
         volumes:
             - postgres_data:/var/lib/postgresql/data
         networks:
