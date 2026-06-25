@@ -71,8 +71,6 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-
-
 load_dotenv()
 DATABASES = {
     "default": {

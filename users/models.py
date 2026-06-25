@@ -10,7 +10,6 @@ class User(AbstractUser):
     country = models.CharField(max_length=100, null=True, blank=True)
     last_login = models.DateTimeField(auto_now=True, null=True, blank=True)
 
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
