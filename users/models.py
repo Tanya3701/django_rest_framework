@@ -10,6 +10,7 @@ class User(AbstractUser):
     country = models.CharField(max_length=100, null=True, blank=True)
     last_login = models.DateTimeField(auto_now=True, null=True, blank=True)
 
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
@@ -41,6 +42,7 @@ class Payment(models.Model):
     )
     link = models.URLField(max_length=1000, null=True, blank=True)
     session_id = models.CharField(max_length=255, null=True, blank=True)
+    image = models.ImageField(upload_to="users/payments/", null=True, blank=True)
 
     class Meta:
         verbose_name = "Платеж"
