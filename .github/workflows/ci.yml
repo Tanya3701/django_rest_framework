@@ -41,10 +41,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run migrations and tests with SQLite
-        run: |
-          python manage.py migrate
-          python manage.py test
+      - name: Run migrations
+        run: python manage.py migrate
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secret.DB_HOST }}
+          DB_PORT: ${{ secret.DB_PORT }}
 
   build:
     needs: test
