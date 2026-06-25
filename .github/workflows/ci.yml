@@ -51,6 +51,9 @@ jobs:
           DB_HOST: ${{ secret.DB_HOST }}
           DB_PORT: ${{ secret.DB_PORT }}
 
+      - name: Run tests
+        run: python manage.py test
+
   build:
     needs: test
     runs-on: ubuntu-latest
